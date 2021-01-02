@@ -1,0 +1,9 @@
+---
+version: '3'
+
+services:
+  request-catcher:
+    build: .
+    restart: unless-stopped
+    ports:
+    - "9504:5000"
