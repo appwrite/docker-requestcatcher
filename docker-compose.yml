@@ -6,4 +6,4 @@ services:
     build: .
     restart: unless-stopped
     ports:
-    - "9504:5000"
+    - "5000:5000"

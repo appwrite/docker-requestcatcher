@@ -8,6 +8,7 @@ FROM base as build
 ENV PYTHONPATH=/root/http-request-catcher
 
 WORKDIR /root
+
 RUN apk --upgrade add --no-cache git \
   && git clone https://github.com/SmarterDM/http-request-catcher.git
   
@@ -24,8 +25,6 @@ USER catcher
 WORKDIR /home/catcher
 
 COPY --chown=catcher:catcher --from=build /root/http-request-catcher /home/catcher
-
-RUN pip install --no-cache-dir -r requirements.txt -t .
 
 EXPOSE 5000
 
