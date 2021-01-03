@@ -25,4 +25,8 @@ WORKDIR /home/catcher
 
 COPY --chown=catcher:catcher --from=build /root/http-request-catcher /home/catcher
 
+RUN pip install --no-cache-dir -r requirements.txt -t .
+
+EXPOSE 5000
+
 CMD ["python", "app.py"]
