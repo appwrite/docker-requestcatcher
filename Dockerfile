@@ -14,7 +14,7 @@ RUN apk --upgrade add --no-cache git \
   
 WORKDIR /root/http-request-catcher
 
-RUN pip install --no-cache-dir -r requirements.txt -t .
+RUN pip install --no-cache-dir flask==1.1.2 -t .
 
 # Prod
 FROM base as prod
