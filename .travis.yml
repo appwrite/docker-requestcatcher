@@ -3,12 +3,13 @@ notifications:
   email:
   - team@appwrite.io
 
-language: minimal
+dist: xenial
+
+language: shell
 
 arch:
   - amd64
   - arm64
-  - arm/v7
 
 os: linux
 
