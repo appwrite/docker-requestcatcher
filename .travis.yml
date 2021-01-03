@@ -27,7 +27,7 @@ script:
   - docker ps -a
   - docker-compose logs request-catcher
   - >
-    if : >/dev/tcp/localhost/9504; then
+    if : >/dev/tcp/localhost/5000; then
       echo 'Connection available.'
       travis_terminate 0
     else
