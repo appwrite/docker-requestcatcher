@@ -28,4 +28,6 @@ COPY --chown=catcher:catcher --from=build /root/http-request-catcher /home/catch
 
 EXPOSE 5000
 
+STOPSIGNAL SIGINT
+
 CMD ["python", "app.py"]
