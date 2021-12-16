@@ -3,7 +3,7 @@
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 [![Docker Pulls](https://img.shields.io/docker/pulls/appwrite/requestcatcher?color=f02e65&style=flat-square)](https://hub.docker.com/r/appwrite/requestcatcher)
 [![Build Status](https://img.shields.io/travis/com/appwrite/docker-requestcatcher?style=flat-square)](https://travis-ci.com/appwrite/docker-requestcatcher)
-[![Twitter Account](https://img.shields.io/twitter/follow/appwrite_io?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite_io)
+[![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Follow Appwrite on StackShare](https://img.shields.io/badge/follow%20on-stackshare-blue?style=flat-square)](https://stackshare.io/appwrite)
 
 The RequestCatcher docker container is used for capturing and debugging HTTP requests sent during app development. This container is based on the smarterdm/http-request-catcher docker image with Appwrite specific configuration settings. For a fresh installation of smarterdm/http-request-catcher image use the [docker original image](https://github.com/SmarterDM/http-request-catcher).
