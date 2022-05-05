@@ -35,15 +35,15 @@ This container supports all environment variables supplied by the original smart
 ### Build
 
 ```bash
-docker build --tag appwrite/requestcatcher:1.0.0 .
+docker build --tag appwrite/requestcatcher:1.1.0 .
 
-docker push appwrite/requestcatcher:1.0.0
+docker push appwrite/requestcatcher:1.1.0
 ```
 
 Multi-arch build (experimental using [buildx](https://github.com/docker/buildx)):
 
 ```
-docker buildx build --platform linux/amd64,linux/arm64/v8 --tag appwrite/requestcatcher:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64/v8 --tag appwrite/requestcatcher:1.1.0 --push .
 ```
 
 ## Find Us
