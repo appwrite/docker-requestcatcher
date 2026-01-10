@@ -28,6 +28,29 @@ Refer [docs](https://docs.docker.com/) for general documentation and guides for 
 docker run appwrite/requestcatcher
 ```
 
+### API Endpoints
+
+The RequestCatcher exposes the following endpoints:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/__last_request__` | GET | Returns the last captured request |
+| `/__all_requests__` | GET | Returns all captured requests (useful for parallel test runs) |
+| `/__clear__` | POST, DELETE | Clears all captured requests |
+| `/*` | Any | Captures any request made to any path |
+
+#### Example: Get All Requests
+
+```bash
+curl http://localhost:5000/__all_requests__
+```
+
+#### Example: Clear Requests
+
+```bash
+curl -X POST http://localhost:5000/__clear__
+```
+
 ### Environment Variables
 
 This container supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
