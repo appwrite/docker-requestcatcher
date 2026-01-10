@@ -18,6 +18,47 @@ def get_all_requests():
     return jsonify(all_requests), 200
 
 
+@app.route('/__find_request__', methods=['GET'])
+def find_request():
+    """
+    Find requests matching header or body values.
+    Query parameters:
+    - header_<name>=<value>: Match requests with specific header value
+    - body=<value>: Match requests containing this value in body
+    - method=<value>: Match requests with specific HTTP method
+    - url=<value>: Match requests with URL containing this value
+    """
+    matches = []
+    
+    for req in all_requests:
+        match = True
+        
+        for key, value in request.args.items():
+            if key.startswith('header_'):
+                header_name = key[7:]  # Remove 'header_' prefix
+                req_headers = {k.lower(): v for k, v in req['headers'].items()}
+                if req_headers.get(header_name.lower()) != value:
+                    match = False
+                    break
+            elif key == 'body':
+                if value not in req.get('data', ''):
+                    match = False
+                    break
+            elif key == 'method':
+                if req.get('method', '').upper() != value.upper():
+                    match = False
+                    break
+            elif key == 'url':
+                if value not in req.get('url', ''):
+                    match = False
+                    break
+        
+        if match:
+            matches.append(req)
+    
+    return jsonify(matches), 200
+
+
 @app.route('/__clear__', methods=['POST', 'DELETE'])
 def clear_requests():
     global last_request, all_requests
