@@ -76,7 +76,11 @@ curl -X POST http://localhost:5000/__clear__
 
 ### Environment Variables
 
-This container supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MAX_REQUEST_HISTORY` | 1000 | Maximum number of requests to store in history. Older requests are automatically removed when this limit is exceeded. |
+
+This container also supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
 
 ### Build
 

@@ -1,11 +1,15 @@
+from collections import deque
 from datetime import datetime
 from flask import Flask, request, jsonify
 from os import environ
 
 app = Flask('HTTP Request Catcher')
 
+# Maximum number of requests to store in history (configurable via environment variable)
+MAX_REQUEST_HISTORY = int(environ.get('MAX_REQUEST_HISTORY', 1000))
+
 last_request = None
-all_requests = []
+all_requests = deque(maxlen=MAX_REQUEST_HISTORY)
 
 
 @app.route('/__last_request__', methods=['GET'])
@@ -15,7 +19,7 @@ def get_last_request():
 
 @app.route('/__all_requests__', methods=['GET'])
 def get_all_requests():
-    return jsonify(all_requests), 200
+    return jsonify(list(all_requests)), 200
 
 
 @app.route('/__find_request__', methods=['GET'])
@@ -61,16 +65,16 @@ def find_request():
 
 @app.route('/__clear__', methods=['POST', 'DELETE'])
 def clear_requests():
-    global last_request, all_requests
+    global last_request
     last_request = None
-    all_requests = []
+    all_requests.clear()
     return '', 204
 
 
 @app.route('/', defaults={'path': ''}, methods=['PUT', 'POST', 'GET', 'HEAD', 'DELETE', 'PATCH', 'OPTIONS'])
 @app.route('/<path:path>', methods=['PUT', 'POST', 'GET', 'HEAD', 'DELETE', 'PATCH', 'OPTIONS'])
 def catch(path):
-    global last_request, all_requests
+    global last_request
 
     last_request = {
         'method': request.method,
