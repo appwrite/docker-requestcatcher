@@ -28,9 +28,59 @@ Refer [docs](https://docs.docker.com/) for general documentation and guides for 
 docker run appwrite/requestcatcher
 ```
 
+### API Endpoints
+
+The RequestCatcher exposes the following endpoints:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/__last_request__` | GET | Returns the last captured request |
+| `/__all_requests__` | GET | Returns all captured requests (useful for parallel test runs) |
+| `/__find_request__` | GET | Find requests matching header/body values (see below) |
+| `/__clear__` | POST, DELETE | Clears all captured requests |
+| `/*` | Any | Captures any request made to any path |
+
+#### Example: Get All Requests
+
+```bash
+curl http://localhost:5000/__all_requests__
+```
+
+#### Example: Find Specific Request
+
+Find requests by header value:
+```bash
+curl "http://localhost:5000/__find_request__?header_X-Custom-Id=abc123"
+```
+
+Find requests by body content:
+```bash
+curl "http://localhost:5000/__find_request__?body=test-event"
+```
+
+Find requests by HTTP method:
+```bash
+curl "http://localhost:5000/__find_request__?method=POST"
+```
+
+Combine multiple filters:
+```bash
+curl "http://localhost:5000/__find_request__?method=POST&header_Content-Type=application/json"
+```
+
+#### Example: Clear Requests
+
+```bash
+curl -X POST http://localhost:5000/__clear__
+```
+
 ### Environment Variables
 
-This container supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MAX_REQUEST_HISTORY` | 1000 | Maximum number of requests to store in history. Older requests are automatically removed when this limit is exceeded. |
+
+This container also supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
 
 ### Build
 

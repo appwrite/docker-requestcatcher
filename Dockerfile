@@ -25,6 +25,7 @@ USER catcher
 WORKDIR /home/catcher
 
 COPY --chown=catcher:catcher --from=build /root/http-request-catcher /home/catcher
+COPY --chown=catcher:catcher app.py /home/catcher/app.py
 
 EXPOSE 5000
 
