@@ -1,5 +1,4 @@
 """Tests for the HTTP Request Catcher API."""
-import json
 import pytest
 from app import app, all_requests, MAX_REQUEST_HISTORY
 
@@ -50,6 +49,19 @@ class TestCatchEndpoint:
             headers={'X-Custom-Header': 'custom-value'}
         )
         assert response.status_code == 200
+
+    def test_catch_returns_configured_response(self, client, monkeypatch):
+        """Test returning a configured response while still capturing the request."""
+        monkeypatch.setattr('app.RESPONSE_BODY', '{"success":true}')
+        monkeypatch.setattr('app.RESPONSE_CONTENT_TYPE', 'application/json')
+        monkeypatch.setattr('app.RESPONSE_STATUS_CODE', 202)
+
+        response = client.post('/purge', data='request-body')
+
+        assert response.status_code == 202
+        assert response.content_type == 'application/json'
+        assert response.json == {'success': True}
+        assert all_requests[-1]['data'] == 'request-body'
 
 
 class TestLastRequestEndpoint:

@@ -79,6 +79,9 @@ curl -X POST http://localhost:5000/__clear__
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `MAX_REQUEST_HISTORY` | 1000 | Maximum number of requests to store in history. Older requests are automatically removed when this limit is exceeded. |
+| `RESPONSE_BODY` | Empty | Body returned for captured requests. |
+| `RESPONSE_CONTENT_TYPE` | `text/html; charset=utf-8` | Content type returned for captured requests. |
+| `RESPONSE_STATUS_CODE` | 200 | Status code returned for captured requests. |
 
 This container also supports all environment variables supplied by the original smarterdm/http-request-catcher Docker image.
 
@@ -105,4 +108,3 @@ docker buildx build --platform linux/amd64,linux/arm64/v8 --tag appwrite/request
 ## Copyright and license
 
 The MIT License (MIT) [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
-

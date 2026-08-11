@@ -7,6 +7,9 @@ app = Flask('HTTP Request Catcher')
 
 # Maximum number of requests to store in history (configurable via environment variable)
 MAX_REQUEST_HISTORY = int(environ.get('MAX_REQUEST_HISTORY', 1000))
+RESPONSE_BODY = environ.get('RESPONSE_BODY', '')
+RESPONSE_CONTENT_TYPE = environ.get('RESPONSE_CONTENT_TYPE', 'text/html; charset=utf-8')
+RESPONSE_STATUS_CODE = int(environ.get('RESPONSE_STATUS_CODE', 200))
 
 last_request = None
 all_requests = deque(maxlen=MAX_REQUEST_HISTORY)
@@ -85,7 +88,7 @@ def catch(path):
     }
     all_requests.append(last_request)
 
-    return '', 200
+    return RESPONSE_BODY, RESPONSE_STATUS_CODE, {'Content-Type': RESPONSE_CONTENT_TYPE}
 
 
 if __name__ == '__main__':
