@@ -1,5 +1,5 @@
 # Base
-FROM python:3.6-alpine3.15 as base
+FROM python:3.11-alpine3.15@sha256:1567c44f47c8136752ee4301be2e94130a5f8e1fb7a0e737ccac28fb8f66fd0f as base
 LABEL maintainer="team@appwrite.io"
 
 # Build
